@@ -14,15 +14,21 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(),
+      home: new Myapp(),
       routes: <String, WidgetBuilder>{
-        "/MyHome": (BuildContext context) => MyHomePage(),
+        "/MyHome": (BuildContext context) => Myapp(),
       },
     );
   }
 }
 
-class MyHomePage extends StatelessWidget implements TickerProvider {
+class Myapp extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState()=>MyappState();
+
+}
+class MyappState extends State<Myapp>{
+  int _index=0;
   @override
   Widget build(BuildContext context) =>
       new Theme(data: Theme.of(context).copyWith(
@@ -36,37 +42,40 @@ class MyHomePage extends StatelessWidget implements TickerProvider {
 //            .caption
 //            .copyWith(color: Colors.grey[400])),
       ), child:
-      MaterialScaffod(index: 2,
+      MaterialScaffod(index: _index,
+        appBar: new AppBar(title: Text("$_index"),),
+        materialScaffodType: MaterialScaffodType.INDICATED,
         iconSize: 30.0,
         childrenContent: [
           new Scaffold(
-            appBar: AppBar(title: Text("来了"), bottom: TabBar(controller:TabController(length: 5,vsync: this),tabs: <Widget>[
-              Icon(Icons.book),
-              Icon(Icons.web),
-              Icon(Icons.call),
-              Icon(Icons.call),
-              Icon(Icons.call)
-            ],),),),
-          new Center(key: GlobalKey(), child: new Text('11111111111'),),
-          new Center(key: GlobalKey(), child: new Text('22222222222'),),
-          new Center(key: GlobalKey(), child: new Text('3333333333333'),),
-          new Center(key: GlobalKey(), child: new Text('4444444444444'),),
+            appBar: AppBar(title: Text("来了"),),),
+          new Center(child: new Text('11111111111'),),
+          new Center(child: new Text('22222222222'),),
+          new Center(child: new Text('3333333333333'),),
+          new Center(child: new Text('4444444444444'),),
+          new SingleChildScrollView(child: SizedBox(height: 1200.0,child: Center(child: Text('ssssssssssssssssssssssss',style: new TextStyle(fontSize: 72.0),),),),),
         ],
-        itembars: [
-          BottomNavigationBarItem(icon: Icon(Icons.book), title: Text('1')),
-          BottomNavigationBarItem(icon: Icon(Icons.web), title: Text('2')),
-          BottomNavigationBarItem(icon: Icon(Icons.call), title: Text('3')),
-          BottomNavigationBarItem(icon: Icon(Icons.call), title: Text('x')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.verified_user), title: Text('4')),
-        ], onIndexChanged: (index) {},));
+        itembars:<Widget>[
+//          BottomNavigationBarItem(icon: Icon(Icons.book), title: Text('1')),
+//          BottomNavigationBarItem(icon: Icon(Icons.web), title: Text('2')),
+//          BottomNavigationBarItem(icon: Icon(Icons.call), title: Text('3')),
+//          BottomNavigationBarItem(icon: Icon(Icons.call), title: Text('x')),
+//          BottomNavigationBarItem(
+//              icon: Icon(Icons.verified_user), title: Text('4')),
+          Card(child: new SizedBox(height: 56.0,child: Text("西瓜",style: new TextStyle(fontSize: 28.0)),),),
+          Card(child: new SizedBox(height: 56.0,child: Text("哈密码",style: new TextStyle(fontSize: 28.0)),),),
+          Card(child: new SizedBox(height: 56.0,child: Text("芒果",style: new TextStyle(fontSize: 28.0)),),),
+          Card(child: new SizedBox(height: 56.0,child: Text("橘子",style: new TextStyle(fontSize: 28.0)),),),
+          Card(child: new SizedBox(height: 56.0,child: Text("甜瓜",style: new TextStyle(fontSize: 28.0)),),),
+          Card(child: new SizedBox(height: 56.0,child: Text("葡萄",style: new TextStyle(fontSize: 28.0)),),),
 
-  @override
-  Ticker createTicker(TickerCallback onTick) {
-    return new Ticker(onTick);
-  }
+        ], onIndexChanged: (index) {
+              setState(() {
+                _index=index;
+              });
+        },));
+
 
 }
-
 
 
